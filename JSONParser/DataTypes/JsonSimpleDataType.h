@@ -1,1 +1,0 @@
-//simple data types are string, number(int/double), bool, null

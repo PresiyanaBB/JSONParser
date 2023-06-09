@@ -1,0 +1,33 @@
+#include "../DataTypes/JsonSimpleData.h"
+
+JsonSimpleData::JsonSimpleData(MyString value)
+{
+	if (value == "null")
+	{
+		type = ValueTypes::null;
+		this->value = value;
+	}
+
+	else if (value == "true" || value == "false")
+	{
+		type = ValueTypes::boolean;
+		this->value = value;
+	}
+
+	else if (value[0] == '\"' && value[value.length() - 1] == '\"')
+	{
+		type = ValueTypes::string;
+		this->value = value;
+	}
+	
+	else if (isNumber(value))
+	{
+		type = ValueTypes::number;
+		this->value = value;
+	}
+
+	else
+	{
+		throw std::invalid_argument(INVALID_SIMPLE_DATA_ARGUMENT);
+	}
+}
