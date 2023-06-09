@@ -1,6 +1,11 @@
 #include "../DataTypes/JsonSimpleData.h"
 
-JsonSimpleData::JsonSimpleData(MyString value)
+JsonSimpleData::JsonSimpleData(const MyString& value) : JsonValue(ValueTypes::null)
+{
+	parse(value);
+}
+
+void JsonSimpleData::parse(const MyString& value)
 {
 	if (value == "null")
 	{
@@ -19,7 +24,7 @@ JsonSimpleData::JsonSimpleData(MyString value)
 		type = ValueTypes::string;
 		this->value = value;
 	}
-	
+
 	else if (isNumber(value))
 	{
 		type = ValueTypes::number;
@@ -30,4 +35,15 @@ JsonSimpleData::JsonSimpleData(MyString value)
 	{
 		throw std::invalid_argument(INVALID_SIMPLE_DATA_ARGUMENT);
 	}
+}
+
+
+MyString JsonSimpleData::stringify() const
+{
+	return this->value;
+}
+
+JsonValue* JsonSimpleData::clone() const
+{
+	return new JsonSimpleData(*this);
 }

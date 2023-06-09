@@ -1,12 +1,14 @@
 #pragma once
-#include "../ValueTypes/JsonValue.hpp"
+#include "../ValueTypes/JsonValue.h"
 
 //simple data types are string, number(int/double), bool, null
-class JsonSimpleData : public JsonValue<MyString>
+class JsonSimpleData : public JsonValue
 {
-	//inherited:
-	//MyString value and ValueTypes type
+	MyString value;
 
 public:
-	JsonSimpleData(MyString value);
+	JsonSimpleData(const MyString& value);
+	void parse(const MyString& value) override;
+	MyString stringify() const override;
+	JsonValue* clone()  const override;
 };
