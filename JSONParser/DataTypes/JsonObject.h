@@ -9,8 +9,8 @@ class JsonObject : public JsonValue
 
 public:
 	JsonObject();
-	JsonObject(const MyString& value);
-	void parse(const MyString& value) override;
+	JsonObject(const MyString& value, size_t& i);
+	void parse(const MyString& value,size_t& i) override;
 	MyString stringify() const override;
 	JsonValue* clone()  const override;
 };

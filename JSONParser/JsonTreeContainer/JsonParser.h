@@ -10,4 +10,6 @@ class JsonParser
 
 public:
 	JsonParser(fstream& ifs);
+
+	void print() const;
 };

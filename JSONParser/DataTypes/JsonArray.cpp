@@ -2,24 +2,27 @@
 #include "JsonObject.h"
 #include "JsonSimpleData.h"
 
-JsonArray::JsonArray(const MyString& value) : JsonValue(ValueTypes::array)
+JsonArray::JsonArray(const MyString& value,size_t& i) : JsonValue(ValueTypes::array)
 {
 	size = 0;
 	capacity = 8;
 	values = new JsonValue * [capacity];
 
-	parse(value);
+	parse(value,i);
 }
 
-void JsonArray::parse(const MyString& value)
+void JsonArray::parse(const MyString& value, size_t& i)
 {
-	size_t i = 0;
-	size_t count = value.length();
-
-	for (size_t i = 0; i < count; i++)
+	while(true)
 	{
-		if (value[i] == ' ' || value[i] == '\n')
-			continue;
+		if (value[i] == ' ' || value[i] == '\n' || value[i] == ',')
+			i++;
+
+		else if (value.length() == i + 1)
+			throw std::exception(INVALID_JSON_FILE);
+
+		else if (value[i] == ']')
+			break;
 
 		else
 		{
@@ -27,7 +30,7 @@ void JsonArray::parse(const MyString& value)
 				resize();
 
 			values[size++] = setValue(value, i);
-			while (value[i++] != ',');
+			i++;
 		}
 	}
 }

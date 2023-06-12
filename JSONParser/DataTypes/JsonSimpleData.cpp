@@ -1,40 +1,60 @@
 #include "../DataTypes/JsonSimpleData.h"
 
-JsonSimpleData::JsonSimpleData(const MyString& value) : JsonValue(ValueTypes::null)
+JsonSimpleData::JsonSimpleData(const MyString& value,size_t& i) : JsonValue(ValueTypes::null)
 {
-	parse(value);
+	parse(value,i);
 }
 
-void JsonSimpleData::parse(const MyString& value)
+void JsonSimpleData::parse(const MyString& value, size_t& i)
 {
-	if (value == "null")
+	if (value.substr(i,4) == "null")
 	{
-		type = ValueTypes::null;
-		this->value = value;
+		this->type = ValueTypes::null;
+		this->value = value.substr(i, 4);
+		i += 4;
 	}
 
-	else if (value == "true" || value == "false")
+	else if (value.substr(i, 4) == "true")
 	{
-		type = ValueTypes::boolean;
-		this->value = value;
+		this->type = ValueTypes::boolean;
+		this->value = value.substr(i, 4);
+		i += 4;
+	}
+	
+	else if (value.substr(i, 5) == "false")
+	{
+		this->type = ValueTypes::boolean;
+		this->value = value.substr(i, 5);
+		i += 5;
 	}
 
-	else if (value[0] == '\"' && value[value.length() - 1] == '\"')
+	else if (value[i] == '\"')
 	{
-		type = ValueTypes::string;
-		this->value = value;
+		MyString currentValue = "\"";
+
+		while (value[++i] != '\"')
+			currentValue += value[i];
+
+		currentValue += '\"';
+		this->type = ValueTypes::string;
+		this->value = currentValue;
 	}
 
-	else if (isNumber(value))
+	else if (value[i] >= '0' && value[i] <= '9')
 	{
-		type = ValueTypes::number;
-		this->value = value;
+		MyString currentValue;
+		while ((value[i] == '.') || (value[i] >= '0' && value[i] <= '9'))
+		 	currentValue += value[i++];
+
+		if (isNumber(currentValue))
+		{
+			this->type = ValueTypes::number;
+			this->value = currentValue;
+		}
 	}
 
 	else
-	{
 		throw std::invalid_argument(INVALID_SIMPLE_DATA_ARGUMENT);
-	}
 }
 
 

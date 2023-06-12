@@ -16,6 +16,8 @@ const char DECIMAL_SEPARATOR = '.';
 //error msg list
 const char* const INVALID_SIMPLE_DATA_ARGUMENT = "Json is invalid! There isn't such simple data type (string, number, bool, null).";
 const char* const INVALID_KEY_ARGUMENT = "Json is invalid! Keys must be in (\"...\") format.";
+const char* const INVALID_JSON_SYNTAX = "Json must start with { in order to be object";
+const char* const INVALID_JSON_FILE = "Json file is invalid!";
 
 namespace
 {

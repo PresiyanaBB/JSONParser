@@ -18,6 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Config\String\MyString.cpp" />
+    <ClCompile Include="DataTypes\JsonArray.cpp" />
+    <ClCompile Include="DataTypes\JsonObject.cpp" />
+    <ClCompile Include="DataTypes\JsonSimpleData.cpp" />
+    <ClCompile Include="DataTypes\JsonSimpleData.h" />
+    <ClCompile Include="startup.cpp" />
+    <ClCompile Include="JsonTreeContainer\JsonParser.cpp" />
+    <ClCompile Include="JsonTreeContainer\JsonSerializer.cpp" />
+    <ClCompile Include="ValueTypes\JsonValue.cpp" />
+    <ClCompile Include="ValueTypes\KeyValuePair.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config\Configurations.h" />
+    <ClInclude Include="Config\DynamicArray.hpp" />
+    <ClInclude Include="Config\String\MyString.h" />
+    <ClInclude Include="DataTypes\JsonArray.h" />
+    <ClInclude Include="DataTypes\JsonObject.h" />
+    <ClInclude Include="JsonTreeContainer\JsonParser.h" />
+    <ClInclude Include="JsonTreeContainer\JsonSerializer.h" />
+    <ClInclude Include="ValueTypes\JsonValue.h" />
+    <ClInclude Include="ValueTypes\KeyValuePair.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,9 +149,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="JSONParser.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

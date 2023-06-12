@@ -14,10 +14,10 @@ class JsonArray : public JsonValue
 	void resize();
 
 public:
-	JsonArray(const MyString& value);
-	void parse(const MyString& value) override;
+	JsonArray(const MyString& value, size_t& i);
 	MyString stringify() const override;
 	JsonValue* clone()  const override;
+	void parse(const MyString& value, size_t& i) override;
 
 	JsonArray(const JsonArray& other);
 	JsonArray(JsonArray&& other);

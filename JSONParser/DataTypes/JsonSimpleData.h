@@ -7,8 +7,8 @@ class JsonSimpleData : public JsonValue
 	MyString value;
 
 public:
-	JsonSimpleData(const MyString& value);
-	void parse(const MyString& value) override;
+	JsonSimpleData(const MyString& value,size_t& i);
+	void parse(const MyString& value,size_t& i) override;
 	MyString stringify() const override;
 	JsonValue* clone()  const override;
 };

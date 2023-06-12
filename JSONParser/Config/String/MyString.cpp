@@ -156,12 +156,12 @@ MyString& MyString::operator=(MyString&& other) noexcept
 	return *this;
 }
 
-char& MyString::operator[](size_t index) //������������ ������
+char& MyString::operator[](size_t index) 
 {
 	return _data[index];
 }
 
-char MyString::operator[](size_t index) const //���������� ������ 
+char MyString::operator[](size_t index) const
 {
 	return _data[index];
 }
