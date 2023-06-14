@@ -8,7 +8,7 @@ int main()
 {
 	try
 	{
-		///every file is in folder InputFiles 
+		//every file will be placed in folder InputFiles 
 		JsonParser json("json.txt");
 		json.print();
 	}
