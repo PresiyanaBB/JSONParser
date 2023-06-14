@@ -2,10 +2,10 @@
    "name":"ACME Software Co.",
    "type":"Software Development Company",
    "offices": [
-              "test",
+              "pppp",
                [     
-                  "value1",
-                  "value2"
+                  "ddz",
+                  "okok"
                 ],
                {  
                    "name":"Headquarters",
@@ -37,4 +37,5 @@
                    "directorId":0.56,
                    "presidentId":1
                 }
- }
+
+}

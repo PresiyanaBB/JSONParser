@@ -38,10 +38,13 @@ void JsonObject::parse(const MyString& value,size_t& i)
 
 		else
 		{
-			currentPair.value = setValue(value,i);
+			JsonValue* jv = setValue(value, i);
+			currentPair = jv;
 			hasKey = false;
 			i++;
 			pairs.add(currentPair);
+			currentPair.free();
+			delete jv;
 		}
 	}
 }

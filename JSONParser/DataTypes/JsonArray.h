@@ -24,4 +24,6 @@ public:
 
 	JsonArray& operator=(const JsonArray& other);
 	JsonArray& operator=(JsonArray&& other);
+
+	~JsonArray();
 };

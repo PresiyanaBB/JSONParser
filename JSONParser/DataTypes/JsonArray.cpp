@@ -119,3 +119,8 @@ JsonArray& JsonArray::operator=(JsonArray&& other)
 	}
 	return *this;
 }
+
+JsonArray::~JsonArray()
+{
+	free();
+}

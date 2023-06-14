@@ -5,16 +5,18 @@ using std::fstream;
 
 int main()
 {
-	fstream ifs("InputFiles/json.txt");
+{
 	try
 	{
-		JsonParser json(ifs);
+		///every file is in folder InputFiles 
+		JsonParser json("json.txt");
 		json.print();
 	}
 	catch (const std::exception& ex)
 	{
 		std::cout << ex.what();
 	}
-	
-	ifs.close();
+}
+
+	_CrtDumpMemoryLeaks();
 }

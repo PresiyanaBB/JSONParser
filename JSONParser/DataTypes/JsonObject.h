@@ -4,8 +4,8 @@
 
 class JsonObject : public JsonValue
 {
-	DynamicArray<KeyValuePair> pairs;
 	MyString setKey(const MyString& value, size_t& i);
+	DynamicArray<KeyValuePair> pairs;
 
 public:
 	JsonObject();

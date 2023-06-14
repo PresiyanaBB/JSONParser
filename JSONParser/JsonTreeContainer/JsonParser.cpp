@@ -1,7 +1,9 @@
 #include "JsonParser.h"
 
-JsonParser::JsonParser(fstream& ifs)
+JsonParser::JsonParser(const MyString& fileName)
 {
+	this->fileName = "InputFiles/" + fileName;
+	fstream ifs(this->fileName.c_str());
 	size_t i = 0;
 	MyString currentValue;
 	MyString json;
@@ -33,6 +35,8 @@ JsonParser::JsonParser(fstream& ifs)
 	{
 		std::cout << ex.what();
 	}
+	
+	ifs.close();
 }
 
 void JsonParser::print() const
