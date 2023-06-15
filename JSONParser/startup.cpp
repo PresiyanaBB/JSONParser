@@ -9,8 +9,6 @@ int main()
 	//set parse value
 	//search parse value, add regex
 	//save add path
-	//files will always be in InputFiles
-	//search with contains,endswith,startswith *a,a*,*a*
 
 	try
 	{
@@ -23,7 +21,8 @@ int main()
 		//json.search("\"*am*\"");
 		//json.set("management/directorId","\"a\""); //!!
 		//json.set("management/directorId","2"); //!!
-		json.save();
+		//json.save();
+		//json.save("management","testPath.txt");
 	}
 	catch (const std::exception& ex)
 	{

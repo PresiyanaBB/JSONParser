@@ -113,7 +113,11 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 	if (!ofs.is_open())
 		throw std::invalid_argument(FILE_NOT_FOUND);
 
-	ofs << root.stringify();
+	if (path == "")
+		ofs << root.stringify();
+	
+	else
+		ofs << this->findByPath(path)->stringify();
 
 	ofs.close();
 }
