@@ -1,10 +1,13 @@
 #pragma once
 #include "../ValueTypes/JsonValue.h"
+#include "JsonObject.h"
+#include "../Config/DynamicArray.hpp"
+#include "JsonSimpleData.h"
 
 class JsonArray : public JsonValue
 {
 	JsonValue** values;
-	
+
 	size_t size = 0;
 	size_t capacity = 0;
 
@@ -15,6 +18,7 @@ class JsonArray : public JsonValue
 
 public:
 	JsonArray(const MyString& value, size_t& i);
+	JsonArray();
 	MyString stringify() const override;
 	JsonValue* clone()  const override;
 	void parse(const MyString& value, size_t& i) override;
@@ -22,8 +26,15 @@ public:
 	JsonArray(const JsonArray& other);
 	JsonArray(JsonArray&& other);
 
+	void add(JsonValue* value);
+	void add(JsonArray value);
+	const size_t getSize() const;
+
+	void search(const MyString& key) const override;
+
 	JsonArray& operator=(const JsonArray& other);
 	JsonArray& operator=(JsonArray&& other);
+	JsonArray& operator+=(const JsonArray& other);
 
 	~JsonArray();
 };

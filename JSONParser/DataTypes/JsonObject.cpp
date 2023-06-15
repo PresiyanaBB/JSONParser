@@ -1,6 +1,4 @@
 #include "JsonObject.h"
-#include "JsonArray.h"
-#include "JsonSimpleData.h"
 
 JsonObject::JsonObject(const MyString& value,size_t& i) : JsonValue(ValueTypes::object)
 {
@@ -49,6 +47,20 @@ void JsonObject::parse(const MyString& value,size_t& i)
 	}
 }
 
+void JsonObject::search(const MyString& key) const
+{
+	size_t count = pairs.count();
+
+	for (size_t i = 0; i < count; i++)
+	{
+		if (pairs[i].key == key)
+			std::cout << pairs[i].value->stringify() << std::endl;
+
+		else
+			pairs[i].value->search(key);
+	}
+}
+
 MyString JsonObject::setKey(const MyString& value,size_t& i)
 {
 	MyString key;
@@ -85,4 +97,25 @@ MyString JsonObject::stringify() const
 JsonValue* JsonObject::clone() const
 {
 	return new JsonObject(*this);
+}
+
+JsonValue*& JsonObject::find(DynamicArray<MyString> paths, size_t& ind)
+{
+	size_t count = pairs.count();
+
+	for (size_t i = 0; i < count; i++)
+	{
+		MyString a = pairs[i].key;
+		MyString b = paths[ind];
+
+		if (pairs[i].key == paths[ind])
+		{
+			ind++;
+			if (ind == paths.count())
+				return pairs[i].value;
+
+			else
+				return pairs[i].value->find(paths,ind);
+		}
+	}
 }

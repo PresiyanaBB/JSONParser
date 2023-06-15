@@ -1,6 +1,11 @@
 #include "JsonArray.h"
-#include "JsonObject.h"
-#include "JsonSimpleData.h"
+
+JsonArray::JsonArray() : JsonValue(ValueTypes::array)
+{
+	size = 0;
+	capacity = 8;
+	values = new JsonValue * [capacity];
+}
 
 JsonArray::JsonArray(const MyString& value,size_t& i) : JsonValue(ValueTypes::array)
 {
@@ -110,6 +115,7 @@ JsonArray& JsonArray::operator=(const JsonArray& other)
 	}
 	return *this;
 }
+
 JsonArray& JsonArray::operator=(JsonArray&& other)
 {
 	if (this != &other)
@@ -120,7 +126,58 @@ JsonArray& JsonArray::operator=(JsonArray&& other)
 	return *this;
 }
 
+JsonArray& JsonArray::operator+=(const JsonArray& other)
+{
+	JsonValue** result = new JsonValue*[(size + other.size)];
+	for (size_t i = 0; i < size; i++)
+		result[i] = this->values[i];
+
+
+	for (size_t i = 0; i < other.size; i++)
+		result[size + i] = other.values[i];
+
+	size += other.size;
+	delete[] values;
+	values = result;
+
+	return *this;
+}
+
 JsonArray::~JsonArray()
 {
 	free();
+}
+
+void JsonArray::add(JsonArray value)
+{
+	if (size == capacity)
+		resize();
+	
+	for (size_t i = 0; i < value.size; i++)
+	{
+		if (size == capacity)
+			resize();
+
+		values[size++] = value.values[i]->clone();
+	}
+}
+
+void JsonArray::add(JsonValue* value)
+{
+	if (size == capacity)
+		resize();
+	
+	values[size++] = value->clone();
+}
+
+void JsonArray::search(const MyString& key) const
+{
+	for (size_t i = 0; i < size; i++)
+		if (values[i]->getType() == ValueTypes::object)
+			values[i]->search(key);
+}
+
+const size_t JsonArray::getSize() const
+{
+	return size;
 }

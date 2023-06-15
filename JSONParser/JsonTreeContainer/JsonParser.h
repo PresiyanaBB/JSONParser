@@ -2,28 +2,35 @@
 #include <iostream>
 #include <fstream>
 #include "../DataTypes/JsonObject.h"
+#include "../DataTypes/JsonArray.h"
 using std::fstream;
 
 class JsonParser
 {
-	friend class JsonParser;
 	JsonObject root;
 	MyString fileName = "json.txt";
 
-	//JsonObject findByPath(MyString path);
-
+	JsonValue*& findByPath(const MyString& path);
 public:
 	JsonParser(const MyString& fileName);
 	void print() const;
 
 	/// <summary>
+	/// _string* (everything that begins with _string), _string (only the exact string)
+	/// </summary>
+	/// <param name="key"></param>
+	void search(const MyString& key) const;
+	
+	void set(const MyString& path, const MyString& string);
+	
+	/// <summary>
 	/// path is for the path in the json (will must save only part or default - whole json)
 	/// </summary>
-	void save(const MyString& path, const MyString& filename = "json.txt") const;
+	/// <param name="path"></param>
+	/// <param name="filename"></param>
+	void save(const MyString& path = "", const MyString& filename = "");
 	
 	void move(const MyString& pathFrom, const MyString& pathTo) const;
-	void search(const MyString& key) const; //_string* (everything that begins with _string), _string (only the exact string)
-	void set(const MyString& path, const MyString& string) const;
 	void create(const MyString& path, const MyString& string) const;
 	void remove(const MyString& path) const;
 };

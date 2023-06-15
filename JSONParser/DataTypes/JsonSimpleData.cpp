@@ -1,27 +1,27 @@
 #include "../DataTypes/JsonSimpleData.h"
 
-JsonSimpleData::JsonSimpleData(const MyString& value,size_t& i) : JsonValue(ValueTypes::null)
+JsonSimpleData::JsonSimpleData(const MyString& value, size_t& i) : JsonValue(ValueTypes::null)
 {
-	parse(value,i);
+	parse(value, i);
 }
 
 void JsonSimpleData::parse(const MyString& value, size_t& i)
 {
-	if (value.substr(i,4) == "null")
+	if ((value.length() >= i + 4) && value.substr(i, 4) == "null")
 	{
 		this->type = ValueTypes::null;
 		this->value = value.substr(i, 4);
 		i += 4;
 	}
 
-	else if (value.substr(i, 4) == "true")
+	else if ((value.length() >= i + 4) && value.substr(i, 4) == "true")
 	{
 		this->type = ValueTypes::boolean;
 		this->value = value.substr(i, 4);
 		i += 4;
 	}
-	
-	else if (value.substr(i, 5) == "false")
+
+	else if ((value.length() >= i + 5) && value.substr(i, 5) == "false")
 	{
 		this->type = ValueTypes::boolean;
 		this->value = value.substr(i, 5);
@@ -44,7 +44,7 @@ void JsonSimpleData::parse(const MyString& value, size_t& i)
 	{
 		MyString currentValue;
 		while ((value[i] == '.') || (value[i] >= '0' && value[i] <= '9'))
-		 	currentValue += value[i++];
+			currentValue += value[i++];
 
 		if (isNumber(currentValue))
 		{
@@ -55,15 +55,16 @@ void JsonSimpleData::parse(const MyString& value, size_t& i)
 
 	else
 		throw std::invalid_argument(INVALID_SIMPLE_DATA_ARGUMENT);
+
 }
 
 
-MyString JsonSimpleData::stringify() const
-{
-	return this->value;
-}
+	MyString JsonSimpleData::stringify() const
+	{
+		return this->value;
+	}
 
-JsonValue* JsonSimpleData::clone() const
-{
-	return new JsonSimpleData(*this);
-}
+	JsonValue* JsonSimpleData::clone() const
+	{
+		return new JsonSimpleData(*this);
+	}

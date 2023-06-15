@@ -17,3 +17,8 @@ JsonValue* JsonValue::setValue(const MyString& value, size_t& i)
 	else
 		return new JsonSimpleData(value,i);
 }
+
+ValueTypes JsonValue::getType() const
+{
+	return type;
+}

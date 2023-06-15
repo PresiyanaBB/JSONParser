@@ -8,9 +8,13 @@ int main()
 {
 	try
 	{
-		///every file is in folder InputFiles 
+		///every file will be placed in folder InputFiles 
 		JsonParser json("json.txt");
-		json.print();
+		//json.print();
+		//json.search("\"name\"");
+		//json.set("management/directorId","\"a\""); //!!
+		//json.set("management/directorId","2"); //!!
+		json.save();
 	}
 	catch (const std::exception& ex)
 	{
