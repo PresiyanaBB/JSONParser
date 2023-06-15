@@ -177,6 +177,13 @@ void JsonArray::search(const MyString& key) const
 			values[i]->search(key);
 }
 
+void JsonArray::search(const MyString& key, bool (*criteria)(const MyString& lhs, const MyString& rhs)) const
+{
+	for (size_t i = 0; i < size; i++)
+		if (values[i]->getType() == ValueTypes::object)
+			values[i]->search(key,criteria);
+}
+
 const size_t JsonArray::getSize() const
 {
 	return size;

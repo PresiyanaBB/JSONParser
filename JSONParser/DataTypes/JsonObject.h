@@ -19,5 +19,6 @@ public:
 	JsonValue* clone()  const override;
 
 	void search(const MyString& key) const override;
+	void search(const MyString& key, bool (*criteria)(const MyString& lhs, const MyString& rhs)) const override;
 	JsonValue*& find(DynamicArray<MyString> paths, size_t& ind) override;
 };

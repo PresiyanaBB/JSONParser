@@ -73,7 +73,19 @@ JsonValue*& JsonParser::findByPath(const MyString& path)
 void JsonParser::search(const MyString& key) const
 {
 	std::cout << "\n[\n";
-	root.search(key);
+	
+	if (startsWith(key, "\"*") && endsWith(key, "*\""))
+		root.search(key.substr(2, key.length() - 4), contains);
+
+	else if (endsWith(key,"*\""))
+		root.search(key.substr(0,key.length() - 2), startsWith);
+	
+	else if (startsWith(key,"\"*"))
+		root.search(key.substr(2, key.length() - 2), endsWith);
+
+	else
+		root.search(key);
+
 	std::cout << "]\n";
 }
 

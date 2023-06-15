@@ -1,5 +1,31 @@
 #include "MyString.h"
 
+bool contains(const MyString& lhs, const MyString& rhs)
+{
+	size_t iterCount = lhs.length() - rhs.length();
+	for (size_t i = 0; i <= iterCount; i++)
+		if (lhs.substr(i, rhs.length()) == rhs)
+			return true;
+
+	return false;
+}
+
+bool startsWith(const MyString& lhs, const MyString& rhs)
+{
+	if (lhs.length() >= rhs.length())
+		return (lhs.substr(0, rhs.length()) == rhs);
+	
+	return false;
+}
+
+bool endsWith(const MyString& lhs, const MyString& rhs)
+{
+	if (lhs.length() >= rhs.length())
+		return (lhs.substr(lhs.length() - rhs.length(), rhs.length()) == rhs);
+
+	return false;
+}
+
 MyString::MyString(size_t capacity)
 {
 	_length = capacity - 1;

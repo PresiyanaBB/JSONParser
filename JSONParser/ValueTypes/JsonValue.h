@@ -21,12 +21,10 @@ public:
 	/// </summary>
 	virtual MyString stringify() const = 0;
 	virtual JsonValue* clone()  const = 0;
+
 	virtual void search(const MyString& key) const {}
-	virtual JsonValue*& find(DynamicArray<MyString> paths, size_t& ind)
-	{
-		JsonValue* jv;
-		return jv;
-	}
+	virtual void search(const MyString& key, bool (*criteria)(const MyString& lhs,const MyString& rhs)) const {}
+	virtual JsonValue*& find(DynamicArray<MyString> paths, size_t& ind);
 
 	virtual ~JsonValue() = default;
 };

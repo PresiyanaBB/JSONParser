@@ -61,6 +61,21 @@ void JsonObject::search(const MyString& key) const
 	}
 }
 
+void JsonObject::search(const MyString& key, bool (*criteria)(const MyString& lhs, const MyString& rhs)) const
+{
+	size_t count = pairs.count();
+
+	for (size_t i = 0; i < count; i++)
+	{
+		//std::cout << pairs[i].key << " " << key << "\n";
+		if (criteria(pairs[i].key,key))
+			std::cout << pairs[i].value->stringify() << std::endl;
+
+		else
+			pairs[i].value->search(key,criteria);
+	}
+}
+
 MyString JsonObject::setKey(const MyString& value,size_t& i)
 {
 	MyString key;

@@ -42,6 +42,10 @@ public:
 
 std::ostream& operator<<(std::ostream& os, const MyString& str);
 
+bool contains(const MyString& lhs, const MyString& rhs);
+bool startsWith(const MyString& lhs, const MyString& rhs);
+bool endsWith(const MyString& lhs, const MyString& rhs);
+
 bool operator<(const MyString& lhs, const MyString& rhs);
 bool operator<=(const MyString& lhs, const MyString& rhs);
 bool operator>=(const MyString& lhs, const MyString& rhs);

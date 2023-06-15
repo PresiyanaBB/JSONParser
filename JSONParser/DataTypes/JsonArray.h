@@ -31,6 +31,7 @@ public:
 	const size_t getSize() const;
 
 	void search(const MyString& key) const override;
+	void search(const MyString& key, bool (*criteria)(const MyString& lhs, const MyString& rhs)) const override;
 
 	JsonArray& operator=(const JsonArray& other);
 	JsonArray& operator=(JsonArray&& other);
