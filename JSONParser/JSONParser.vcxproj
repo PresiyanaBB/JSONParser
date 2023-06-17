@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\CppUni\JSONParser\JSONParser\ValueTypes\JsonValueFactory.cpp" />
     <ClCompile Include="Config\String\MyString.cpp" />
     <ClCompile Include="DataTypes\JsonArray.cpp" />
     <ClCompile Include="DataTypes\JsonObject.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="ValueTypes\KeyValuePair.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\CppUni\JSONParser\JSONParser\ValueTypes\JsonValueFactory.h" />
     <ClInclude Include="Config\Configurations.h" />
     <ClInclude Include="Config\DynamicArray.hpp" />
     <ClInclude Include="Config\String\MyString.h" />

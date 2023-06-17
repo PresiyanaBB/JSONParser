@@ -45,6 +45,9 @@
     <ClCompile Include="ValueTypes\JsonValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\CppUni\JSONParser\JSONParser\ValueTypes\JsonValueFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTypes\JsonObject.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Config\DynamicArray.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CppUni\JSONParser\JSONParser\ValueTypes\JsonValueFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
