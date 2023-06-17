@@ -133,6 +133,5 @@ JsonValue*& JsonObject::find(DynamicArray<MyString> paths, size_t& ind)
 		}
 	}
 
-	JsonValue* jv = nullptr;
-	return jv;
+	throw std::invalid_argument(INVALID_PATH);
 }

@@ -127,15 +127,44 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 
 void JsonParser::create(const MyString& path, const MyString& string)
 {
-	size_t i = 0;
-	JsonValue*& currentValue = findByPath(path);
-
-	if (currentValue)
+	try
+	{
+		JsonValue*& isValueUnique = findByPath(path);
+	}
+	catch (const std::exception&)
+	{
 		throw std::invalid_argument(ELEMENT_DUPLICATION);
+	}
+		
+	size_t len = path.length() - 1;
+	MyString pathWithoutElement;
+	size_t indToElement = 0;
 
+	for (size_t i = len; i >= 0; i--)
+		if (path[i] == '/')
+		{
+			indToElement = i;
+			break;
+		}
+
+	len -= (len - indToElement);
+
+	for (size_t i = 0; i < len; i++)
+		pathWithoutElement += path[i];
+
+	JsonValue*& currentValue = findByPath(pathWithoutElement); //path without element
+	if (currentValue == nullptr)
+		throw std::invalid_argument(INVALID_PATH);
+
+	MyString curVal = currentValue->stringify();
+	size_t i = 0;
 	JsonValue* replacement = setValue(string, i);
+
+	MyString result = (" [ " + curVal + " , " + replacement->stringify() + " ] ");
 	delete currentValue;
-	currentValue = replacement;
+
+	i = 0;
+	currentValue = setValue(result,i);
 	replacement = nullptr;
 
 	save();
