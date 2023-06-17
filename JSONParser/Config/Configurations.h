@@ -19,6 +19,8 @@ const char* const INVALID_KEY_ARGUMENT = "Json is invalid! Keys must be in (\"..
 const char* const INVALID_JSON_SYNTAX = "Json must start with { in order to be object";
 const char* const INVALID_JSON_FILE = "Json file is invalid!";
 const char* const FILE_NOT_FOUND = "Json file is not found or can't be used!";
+const char* const INVALID_PATH = "The given path is invalid";
+const char* const ELEMENT_DUPLICATION = "There is such element on the given position";
 
 namespace
 {

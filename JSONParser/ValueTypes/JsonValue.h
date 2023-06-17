@@ -13,7 +13,6 @@ public:
 
 	JsonValue() : type(ValueTypes::null) {};
 	JsonValue(ValueTypes type) : type(type) {};
-	JsonValue* setValue(const MyString& value, size_t& i);
 	virtual void parse(const MyString& value, size_t& i) = 0;
 
 	/// <summary>

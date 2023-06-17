@@ -33,7 +33,6 @@ void JsonArray::parse(const MyString& value, size_t& i)
 		{
 			if (size == capacity)
 				resize();
-
 			values[size++] = setValue(value, i);
 			i++;
 		}

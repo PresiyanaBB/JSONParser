@@ -93,7 +93,11 @@ void JsonParser::set(const MyString& path, const MyString& string)
 {
 	size_t i = 0;
 	JsonValue*& currentValue = findByPath(path);
-	JsonValue* replacement = currentValue->setValue(string, i);
+
+	if (!currentValue)
+		throw std::invalid_argument(INVALID_PATH);
+
+	JsonValue* replacement = setValue(string, i);
 	delete currentValue;
 	currentValue = replacement;
 	replacement = nullptr;
@@ -103,7 +107,6 @@ void JsonParser::set(const MyString& path, const MyString& string)
 
 void JsonParser::save(const MyString& path, const MyString& fileName)
 {
-	//path!!!!
 	if (fileName != "")
 		this->fileName = "InputFiles/" + fileName;
 
@@ -120,4 +123,20 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 		ofs << this->findByPath(path)->stringify();
 
 	ofs.close();
+}
+
+void JsonParser::create(const MyString& path, const MyString& string)
+{
+	size_t i = 0;
+	JsonValue*& currentValue = findByPath(path);
+
+	if (currentValue)
+		throw std::invalid_argument(ELEMENT_DUPLICATION);
+
+	JsonValue* replacement = setValue(string, i);
+	delete currentValue;
+	currentValue = replacement;
+	replacement = nullptr;
+
+	save();
 }

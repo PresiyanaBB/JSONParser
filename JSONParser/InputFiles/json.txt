@@ -34,7 +34,10 @@
 }
 ],
   "management" : {
-  "directorId" : 2,
+  "directorId" : [
+  "ddz",
+ "okok"
+],
   "presidentId" : 1
 }
 }

@@ -132,4 +132,7 @@ JsonValue*& JsonObject::find(DynamicArray<MyString> paths, size_t& ind)
 				return pairs[i].value->find(paths,ind);
 		}
 	}
+
+	JsonValue* jv = nullptr;
+	return jv;
 }

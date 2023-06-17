@@ -3,6 +3,7 @@
 #include <fstream>
 #include "../DataTypes/JsonObject.h"
 #include "../DataTypes/JsonArray.h"
+#include "../ValueTypes/JsonValueFactory.h"
 using std::fstream;
 
 class JsonParser
@@ -30,7 +31,7 @@ public:
 	/// <param name="filename"></param>
 	void save(const MyString& path = "", const MyString& filename = "");
 	
-	void move(const MyString& pathFrom, const MyString& pathTo) const;
-	void create(const MyString& path, const MyString& string) const;
-	void remove(const MyString& path) const;
+	void move(const MyString& pathFrom, const MyString& pathTo);
+	void create(const MyString& path, const MyString& string);
+	void remove(const MyString& path);
 };
