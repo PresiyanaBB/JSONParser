@@ -22,3 +22,5 @@ public:
 
 	~KeyValuePair();
 };
+
+bool operator==(const KeyValuePair& lhs, const KeyValuePair& rhs);

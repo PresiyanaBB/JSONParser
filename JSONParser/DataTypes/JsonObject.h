@@ -1,9 +1,6 @@
 #pragma once
 #include "../ValueTypes/KeyValuePair.h"
-#include "../Config/DynamicArray.hpp"
-#include "JsonArray.h"
-#include "../ValueTypes/JsonValue.h"
-#include "JsonSimpleData.h"
+#include "../ValueTypes/JsonValueFactory.h"
 
 class JsonObject : public JsonValue
 {
@@ -18,6 +15,7 @@ public:
 	MyString stringify() const override;
 	JsonValue* clone()  const override;
 
+	DynamicArray<KeyValuePair>& getPairs();
 	void search(const MyString& key) const override;
 	void search(const MyString& key, bool (*criteria)(const MyString& lhs, const MyString& rhs)) const override;
 	JsonValue*& find(DynamicArray<MyString> paths, size_t& ind) override;

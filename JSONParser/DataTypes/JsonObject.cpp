@@ -135,3 +135,8 @@ JsonValue*& JsonObject::find(DynamicArray<MyString> paths, size_t& ind)
 
 	throw std::invalid_argument(INVALID_PATH);
 }
+
+DynamicArray<KeyValuePair>& JsonObject::getPairs()
+{
+	return pairs;
+}

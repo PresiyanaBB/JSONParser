@@ -67,3 +67,8 @@ KeyValuePair::~KeyValuePair()
 {
 	free();
 }
+
+bool operator==(const KeyValuePair& lhs, const KeyValuePair& rhs)
+{
+	return (lhs.key == rhs.key) && (lhs.value->stringify() == rhs.value->stringify());
+}

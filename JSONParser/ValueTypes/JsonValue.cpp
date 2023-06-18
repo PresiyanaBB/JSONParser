@@ -10,3 +10,8 @@ JsonValue*& JsonValue::find(DynamicArray<MyString> paths, size_t& ind)
 	JsonValue* jv;
 	return jv;
 }
+
+void JsonValue::remove()
+{
+	JsonValue::~JsonValue();
+}

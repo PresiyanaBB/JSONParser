@@ -14,6 +14,7 @@ int main()
 		//json.set("management/directorId","2"); //!!
 		//json.create("management/directorId/create()", "\"createTestValue\"");
 		//json.create("management/directorId/create()", " { \"createpair\" : \"createt2\" } ");
+		//json.remove("management/directorId");
 	}
 	catch (const std::exception& ex)
 	{

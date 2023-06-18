@@ -172,9 +172,8 @@ void JsonParser::create(const MyString& path, const MyString& string)
 
 void JsonParser::remove(const MyString& path)
 {
-	JsonValue*& currentValue = findByPath(path);
-	
 	size_t len = path.length() - 1;
+	MyString elementKey;
 	MyString pathWithoutElement;
 	size_t indToElement = 0;
 
@@ -185,10 +184,30 @@ void JsonParser::remove(const MyString& path)
 			break;
 		}
 
+	for (size_t i = indToElement + 1; i <= len; i++)
+		elementKey += path[i];
+
+	JsonValue*& elementValue = findByPath(path);
+	KeyValuePair pair;
+	pair.key = "\"" + elementKey + "\"";
+	pair.value = elementValue;
+
 	len -= (len - indToElement);
 
 	for (size_t i = 0; i < len; i++)
-		pathWithoutElement += path[i]; //path 
+		pathWithoutElement += path[i];
+
+	JsonObject& currentValue = *dynamic_cast<JsonObject*>(findByPath(pathWithoutElement)); //path without element //obj
+	
+	DynamicArray<KeyValuePair>& pairs = currentValue.getPairs();
+
+	size_t i;
+	for (i = 0; i < pairs.count(); i++)
+		if (pair == pairs[i])
+		{
+			pairs.remove(pairs[i]);
+			break;
+		}
 
 	save();
 }
