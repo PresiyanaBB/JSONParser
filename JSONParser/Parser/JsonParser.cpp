@@ -8,6 +8,9 @@ JsonParser::JsonParser(const MyString& fileName)
 	MyString currentValue;
 	MyString json;
 
+	if (!ifs.is_open())
+		throw std::invalid_argument(FILE_NOT_FOUND);
+
 	while (!ifs.eof())
 		json += ifs.get();
 
@@ -48,7 +51,7 @@ JsonValue*& JsonParser::findByPath(const MyString& path)
 {
 	DynamicArray<MyString> paths;
 	size_t ind = 0;
-	MyString currentKey = "\"";
+	MyString currentKey;
 	size_t pathlen = path.length();
 
 	for (size_t i = 0; i < pathlen; i++)
@@ -63,8 +66,6 @@ JsonValue*& JsonParser::findByPath(const MyString& path)
 		else
 			currentKey += path[i];
 	}
-
-	currentKey += "\"";
 	paths.add(currentKey);
 
 	JsonValue*& jv = root.find(paths, ind);
@@ -150,7 +151,10 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 		ofs << root.stringify();
 	
 	else
-		ofs << this->findByPath(path)->stringify();
+	{
+		DynamicArray<KeyValuePair>& current = this->findPair(path);
+		ofs << "{\n" << current[current.count() - 1].key << ":" << current[current.count() - 1].value->stringify() << "\n}";
+	}
 
 	ofs.close();
 }
@@ -182,13 +186,14 @@ void JsonParser::create(const MyString& path, const MyString& string)
 	for (size_t i = 0; i < len; i++)
 		pathWithoutElement += path[i];
 
+	pathWithoutElement += "\"";
 	JsonValue*& currentValue = findByPath(pathWithoutElement); //path without element
 	if (currentValue == nullptr)
 		throw std::invalid_argument(INVALID_PATH);
 
 	MyString curVal = currentValue->stringify();
 	size_t i = 0;
-	JsonValue* replacement = setValue(string, i);
+	JsonValue* replacement = setValue(string.substr(1,string.length() - 2), i);
 
 	MyString result = (" [ " + curVal + " , " + replacement->stringify() + " ] ");
 
@@ -215,7 +220,7 @@ void JsonParser::remove(const MyString& path)
 	JsonValue*& elementValue = findByPath(path);
 	KeyValuePair pair;
 	elementKey.reverse();
-	pair.key = "\"" + elementKey + "\"";
+	pair.key = elementKey;
 	pair.value = elementValue;
 	DynamicArray<KeyValuePair>& pairs = findPair(path);
 	DynamicArray<KeyValuePair> newPairs;
@@ -251,8 +256,20 @@ void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
 
 	JsonValue*& value = findByPath(pathFrom);
 	MyString moveValue = value->stringify();
-	MyString path = pathTo + "/" + elementKey + "\"";
+	MyString path = pathTo.substr(0,pathTo.length() - 1) + "/" + elementKey;
 	create(path, moveValue);
 	remove(pathFrom);
 	value = nullptr;
+}
+
+void JsonParser::open(const MyString& filename)
+{
+	JsonParser json2(filename);
+	this->fileName = json2.fileName;
+	this->root = json2.root;
+}
+
+const MyString JsonParser::getFileName() const
+{
+	return this->fileName;
 }

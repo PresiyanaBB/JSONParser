@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "../DynamicArray.hpp"
 #pragma warning (disable : 4996)
 
 class MyString
@@ -30,6 +31,7 @@ public:
 	MyString& operator+=(const char other);
 
 	MyString substr(size_t begin, size_t howMany) const;
+	DynamicArray<MyString> split(char ch);
 	void reverse();
 
 	char& operator[](size_t index);

@@ -14,6 +14,8 @@ class JsonParser
 public:
 	JsonParser(const MyString& fileName);
 	void print() const;
+	void open(const MyString& filename);
+	const MyString getFileName() const;
 
 	/// <summary>
 	/// _string* (everything that begins with _string), _string (only the exact string)

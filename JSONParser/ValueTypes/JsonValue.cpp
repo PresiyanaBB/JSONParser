@@ -7,7 +7,7 @@ ValueTypes JsonValue::getType() const
 
 JsonValue*& JsonValue::find(DynamicArray<MyString> paths, size_t& ind)
 {
-	JsonValue* jv;
+	JsonValue* jv = nullptr;
 	return jv;
 }
 

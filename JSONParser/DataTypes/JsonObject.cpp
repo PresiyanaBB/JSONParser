@@ -54,7 +54,7 @@ void JsonObject::search(const MyString& key) const
 	for (size_t i = 0; i < count; i++)
 	{
 		if (pairs[i].key == key)
-			std::cout << pairs[i].value->stringify() << std::endl;
+			std::cout << pairs[i].value->stringify() << "," << std::endl;
 
 		else
 			pairs[i].value->search(key);

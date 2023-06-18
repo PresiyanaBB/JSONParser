@@ -212,6 +212,23 @@ void MyString::reverse()
 		std::swap(_data[i], _data[_length - i - 1]);
 }
 
+DynamicArray<MyString> MyString::split(char ch)
+{
+	MyString peace;
+	DynamicArray<MyString> arr;
+	for (size_t i = 0; i < _length; i++)
+	{
+		if (_data[i] == ch)
+			arr.add(peace);
+
+		else
+			peace += _data[i];
+	}
+	arr.add(peace);
+
+	return arr;
+}
+
 const char* MyString::c_str() const
 {
 	return _data;
