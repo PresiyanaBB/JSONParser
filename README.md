@@ -1,4 +1,4 @@
-# JSONParser - 2 semester (oop project)
+# JSONParser
 
 * Search specifications
   * str\* - matches every word that begins with the given str
