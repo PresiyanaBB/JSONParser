@@ -25,7 +25,6 @@
     <ClCompile Include="DataTypes\JsonObject.cpp" />
     <ClCompile Include="DataTypes\JsonSimpleData.cpp" />
     <ClCompile Include="Parser\JsonParser.cpp" />
-    <ClCompile Include="Serializer\JsonSerializer.cpp" />
     <ClCompile Include="startup.cpp" />
     <ClCompile Include="ValueTypes\JsonValue.cpp" />
     <ClCompile Include="ValueTypes\JsonValueFactory.cpp" />
@@ -40,7 +39,6 @@
     <ClInclude Include="DataTypes\JsonObject.h" />
     <ClInclude Include="DataTypes\JsonSimpleData.h" />
     <ClInclude Include="Parser\JsonParser.h" />
-    <ClInclude Include="Serializer\JsonSerializer.h" />
     <ClInclude Include="ValueTypes\JsonValue.h" />
     <ClInclude Include="ValueTypes\JsonValueFactory.h" />
     <ClInclude Include="ValueTypes\KeyValuePair.h" />

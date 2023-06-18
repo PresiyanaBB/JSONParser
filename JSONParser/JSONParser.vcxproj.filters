@@ -42,9 +42,6 @@
     <ClCompile Include="Parser\JsonParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Serializer\JsonSerializer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Config\UserInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Parser\JsonParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializer\JsonSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Config\UserInterface.h">
