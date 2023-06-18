@@ -42,7 +42,7 @@
     <ClCompile Include="Parser\JsonParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Config\UserInterface.cpp">
+    <ClCompile Include="UserInterface\UserInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="Parser\JsonParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Config\UserInterface.h">
+    <ClInclude Include="UserInterface\UserInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

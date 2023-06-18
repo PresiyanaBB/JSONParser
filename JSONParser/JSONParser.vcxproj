@@ -20,12 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config\String\MyString.cpp" />
-    <ClCompile Include="Config\UserInterface.cpp" />
     <ClCompile Include="DataTypes\JsonArray.cpp" />
     <ClCompile Include="DataTypes\JsonObject.cpp" />
     <ClCompile Include="DataTypes\JsonSimpleData.cpp" />
     <ClCompile Include="Parser\JsonParser.cpp" />
     <ClCompile Include="startup.cpp" />
+    <ClCompile Include="UserInterface\UserInterface.cpp" />
     <ClCompile Include="ValueTypes\JsonValue.cpp" />
     <ClCompile Include="ValueTypes\JsonValueFactory.cpp" />
     <ClCompile Include="ValueTypes\KeyValuePair.cpp" />
@@ -34,11 +34,11 @@
     <ClInclude Include="Config\Configurations.h" />
     <ClInclude Include="Config\DynamicArray.hpp" />
     <ClInclude Include="Config\String\MyString.h" />
-    <ClInclude Include="Config\UserInterface.h" />
     <ClInclude Include="DataTypes\JsonArray.h" />
     <ClInclude Include="DataTypes\JsonObject.h" />
     <ClInclude Include="DataTypes\JsonSimpleData.h" />
     <ClInclude Include="Parser\JsonParser.h" />
+    <ClInclude Include="UserInterface\UserInterface.h" />
     <ClInclude Include="ValueTypes\JsonValue.h" />
     <ClInclude Include="ValueTypes\JsonValueFactory.h" />
     <ClInclude Include="ValueTypes\KeyValuePair.h" />
