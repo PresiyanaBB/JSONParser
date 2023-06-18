@@ -10,6 +10,7 @@ class JsonParser
 	MyString fileName = "json.txt";
 
 	JsonValue*& findByPath(const MyString& path);
+	DynamicArray<KeyValuePair>& findPair(const MyString& path);
 public:
 	JsonParser(const MyString& fileName);
 	void print() const;

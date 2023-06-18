@@ -30,6 +30,7 @@ public:
 	MyString& operator+=(const char other);
 
 	MyString substr(size_t begin, size_t howMany) const;
+	void reverse();
 
 	char& operator[](size_t index);
 	char operator[](size_t index) const;

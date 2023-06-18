@@ -205,6 +205,16 @@ MyString MyString::substr(size_t begin, size_t howMany) const
 	return res;
 }
 
+void MyString::reverse()
+{
+	MyString reversed;
+
+	for (int i = _length - 1; i >= 0; i--)
+		reversed += _data[i];
+
+	copyFrom(reversed);
+}
+
 const char* MyString::c_str() const
 {
 	return _data;

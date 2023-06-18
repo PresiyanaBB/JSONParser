@@ -19,12 +19,12 @@ void JsonObject::parse(const MyString& value,size_t& i)
 			i++;
 			continue;
 		}
-	
-		else if (value.length() == i + 1)
-			throw std::exception(INVALID_JSON_FILE);
 
 		else if (value[i] == '}')
 			break;
+
+		else if (value.length() == i + 1)
+			throw std::exception(INVALID_JSON_FILE);
 
 		else if (!hasKey)
 		{

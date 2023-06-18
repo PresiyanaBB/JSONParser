@@ -67,7 +67,37 @@ JsonValue*& JsonParser::findByPath(const MyString& path)
 	currentKey += "\"";
 	paths.add(currentKey);
 
-	return root.find(paths, ind);
+	JsonValue*& jv = root.find(paths, ind);
+	return jv;
+}
+
+DynamicArray<KeyValuePair>& JsonParser::findPair(const MyString& path)
+{
+	size_t len = path.length() - 1;
+	MyString pathWithoutElement;
+	size_t indToElement = 0;
+
+	for (int i = len; i >= 0; i--)
+		if (path[i] == '/')
+		{
+			indToElement = i;
+			break;
+		}
+
+	len -= (len - indToElement);
+
+	for (size_t i = 0; i < len; i++)
+		pathWithoutElement += path[i];
+
+	if (pathWithoutElement != "")
+	{
+		JsonValue*& value = findByPath(pathWithoutElement);
+		JsonObject& currentValue = *dynamic_cast<JsonObject*>(value); //path without element //obj
+		return currentValue.getPairs();
+	}
+	
+	else
+		return root.getPairs();
 }
 
 void JsonParser::search(const MyString& key) const
@@ -140,7 +170,7 @@ void JsonParser::create(const MyString& path, const MyString& string)
 	MyString pathWithoutElement;
 	size_t indToElement = 0;
 
-	for (size_t i = len; i >= 0; i--)
+	for (int i = len; i >= 0; i--)
 		if (path[i] == '/')
 		{
 			indToElement = i;
@@ -171,35 +201,23 @@ void JsonParser::create(const MyString& path, const MyString& string)
 }
 
 void JsonParser::remove(const MyString& path)
-{
-	size_t len = path.length() - 1;
+{	
 	MyString elementKey;
-	MyString pathWithoutElement;
-	size_t indToElement = 0;
 
-	for (size_t i = len; i >= 0; i--)
+	for (int i = path.length() - 1; i >= 0; i--)
+	{
 		if (path[i] == '/')
-		{
-			indToElement = i;
 			break;
-		}
 
-	for (size_t i = indToElement + 1; i <= len; i++)
 		elementKey += path[i];
+	}
 
 	JsonValue*& elementValue = findByPath(path);
 	KeyValuePair pair;
+	elementKey.reverse();
 	pair.key = "\"" + elementKey + "\"";
 	pair.value = elementValue;
-
-	len -= (len - indToElement);
-
-	for (size_t i = 0; i < len; i++)
-		pathWithoutElement += path[i];
-
-	JsonObject& currentValue = *dynamic_cast<JsonObject*>(findByPath(pathWithoutElement)); //path without element //obj
-	
-	DynamicArray<KeyValuePair>& pairs = currentValue.getPairs();
+	DynamicArray<KeyValuePair>& pairs = findPair(path);
 
 	size_t i;
 	for (i = 0; i < pairs.count(); i++)
@@ -209,5 +227,26 @@ void JsonParser::remove(const MyString& path)
 			break;
 		}
 
-	save();
+	save("","delete.txt");
+}
+
+void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
+{
+	MyString elementKey;
+	for (int i = pathFrom.length() - 1; i >= 0; i--)
+	{
+		if (pathFrom[i] == '/')
+			break;
+
+		elementKey += pathFrom[i];
+	}
+	elementKey.reverse();
+
+	JsonValue*& value = findByPath(pathFrom);
+	MyString moveValue = value->stringify();
+	MyString path = pathTo + "/" + elementKey + "\"";
+	create(path, moveValue);
+	remove(pathFrom);
+
+	save("","move.txt");
 }

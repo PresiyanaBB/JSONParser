@@ -6,7 +6,6 @@ using std::fstream;
 int main()
 {
 {
-	//set parse value add "?
 	try
 	{
 		JsonParser json("json.txt");
@@ -14,7 +13,8 @@ int main()
 		//json.set("management/directorId","2"); //!!
 		//json.create("management/directorId/create()", "\"createTestValue\"");
 		//json.create("management/directorId/create()", " { \"createpair\" : \"createt2\" } ");
-		//json.remove("management/directorId");
+		//json.remove("management");
+		//json.move("management", "name");
 	}
 	catch (const std::exception& ex)
 	{

@@ -34,7 +34,7 @@
 }
 ],
   "management" : {
-  "directorId" : 0.56 ,
+  "directorId" : 0.56
   "presidentId" : 1
 }
 }
