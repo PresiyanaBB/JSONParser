@@ -20,6 +20,19 @@ create           | creates new object on given path    |create \"path\" \"json\"
 delete           | deletes object on path              |delete \"path\"               
 move             | moves object to another path        |move \"pathFrom\" \"pathTo\"  
 save             | saves json on path as same file     |save \"path\"                 
-saveas           | saves json on path as new file      |saveas \"path\" <filename>    
+saveas           | saves json on path as new file      |saveas \"path\" \<filename\>    
 exit             | exit console                        |exit                          
   
+* Examples for commands:
+  * open json.txt
+  * set "management/directorId" "44"
+  * set "management/directorId" 0.76
+  * set "management/directorId" true
+  * create "name/created" "{"name":"value1","address":"value2"}"
+  * create "management/presidentId/president2" ""president2""
+  * search "add*"
+  * search "ress*"
+  * search "*dres*"
+  * search "address"
+  * delete "management"
+  * delete "management/directorId"
