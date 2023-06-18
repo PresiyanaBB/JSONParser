@@ -34,6 +34,7 @@ public:
 	DynamicArray<T>& sort();
 	DynamicArray<T> select(bool (*criteria)(const T& obj)); //set.select([](int i) { return i % 2 == 0; });
 	void print() const;
+	bool isEqualTo(const DynamicArray<T>& other);
 
 	T& operator[](size_t index);
 	T operator[](size_t index) const;
@@ -41,6 +42,18 @@ public:
 
 	~DynamicArray();
 };
+
+template<typename T>
+bool DynamicArray<T>::isEqualTo(const DynamicArray<T>& other)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		if(data[i] != other.data[i])
+			return false;
+	}
+
+	return true;
+}
 
 template<typename T>
 DynamicArray<T>& DynamicArray<T>::keepUniqueElements()

@@ -90,7 +90,9 @@ DynamicArray<KeyValuePair>& JsonParser::findPair(const MyString& path)
 	for (size_t i = 0; i < len; i++)
 		pathWithoutElement += path[i];
 
-	if (pathWithoutElement != "")
+	pathWithoutElement += "\"";
+
+	if (pathWithoutElement != "" && pathWithoutElement != "\"")
 	{
 		JsonValue*& value = findByPath(pathWithoutElement);
 		DynamicArray<KeyValuePair>& kvp = dynamic_cast<JsonObject*>(value)->getPairs();
@@ -220,9 +222,13 @@ void JsonParser::remove(const MyString& path)
 	JsonValue*& elementValue = findByPath(path);
 	KeyValuePair pair;
 	elementKey.reverse();
-	pair.key = elementKey;
+	pair.key = "\"" + elementKey;
 	pair.value = elementValue;
 	DynamicArray<KeyValuePair>& pairs = findPair(path);
+	
+	if (pair.key[1] == '\"')
+		pair.key = pair.key.substr(1,pair.key.length() - 1);
+
 	DynamicArray<KeyValuePair> newPairs;
 
 	size_t i;
