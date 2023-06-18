@@ -1,11 +1,11 @@
 # JSONParser - 2 semester (oop project)
 
-Markup : *Search specifications
+* Search specifications
   * str\* - matches every word that begins with the given str
   * \*str - matches every word that ends with the given str
   * \*str\* - matches every word that contains the given str
 
-Markup : *File saving specifications
+* File saving specifications
   * files will always be in folder InputFiles
 
 Markup : *Commands
