@@ -19,28 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\CppUni\JSONParser\JSONParser\ValueTypes\JsonValueFactory.cpp" />
     <ClCompile Include="Config\String\MyString.cpp" />
     <ClCompile Include="DataTypes\JsonArray.cpp" />
     <ClCompile Include="DataTypes\JsonObject.cpp" />
     <ClCompile Include="DataTypes\JsonSimpleData.cpp" />
-    <ClCompile Include="DataTypes\JsonSimpleData.h" />
+    <ClCompile Include="Parser\JsonParser.cpp" />
+    <ClCompile Include="Serializer\JsonSerializer.cpp" />
     <ClCompile Include="startup.cpp" />
-    <ClCompile Include="JsonTreeContainer\JsonParser.cpp" />
-    <ClCompile Include="JsonTreeContainer\JsonSerializer.cpp" />
     <ClCompile Include="ValueTypes\JsonValue.cpp" />
+    <ClCompile Include="ValueTypes\JsonValueFactory.cpp" />
     <ClCompile Include="ValueTypes\KeyValuePair.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\CppUni\JSONParser\JSONParser\ValueTypes\JsonValueFactory.h" />
     <ClInclude Include="Config\Configurations.h" />
     <ClInclude Include="Config\DynamicArray.hpp" />
     <ClInclude Include="Config\String\MyString.h" />
     <ClInclude Include="DataTypes\JsonArray.h" />
     <ClInclude Include="DataTypes\JsonObject.h" />
-    <ClInclude Include="JsonTreeContainer\JsonParser.h" />
-    <ClInclude Include="JsonTreeContainer\JsonSerializer.h" />
+    <ClInclude Include="DataTypes\JsonSimpleData.h" />
+    <ClInclude Include="Parser\JsonParser.h" />
+    <ClInclude Include="Serializer\JsonSerializer.h" />
+    <ClInclude Include="ValueTypes\ValueParser.h" />
     <ClInclude Include="ValueTypes\JsonValue.h" />
+    <ClInclude Include="ValueTypes\JsonValueFactory.h" />
     <ClInclude Include="ValueTypes\KeyValuePair.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
