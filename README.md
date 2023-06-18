@@ -12,7 +12,7 @@
 
 Command list:    | Description                         |Syntax:                       
 ---------------- | ----------------------------------- |------------------------------
-open             | opens file                          |open <filename>               
+open             | opens file                          |open \<filename\>               
 print            | print file on console               |print                         
 search           | search by key                       |search \"key\"                
 set              | set json value on path              |set \"path\" \"json\"         
