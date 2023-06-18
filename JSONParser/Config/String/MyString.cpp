@@ -207,12 +207,9 @@ MyString MyString::substr(size_t begin, size_t howMany) const
 
 void MyString::reverse()
 {
-	MyString reversed;
-
-	for (int i = _length - 1; i >= 0; i--)
-		reversed += _data[i];
-
-	copyFrom(reversed);
+	int n = _length / 2;
+	for (int i = 0; i < n ; i++)
+		std::swap(_data[i], _data[_length - i - 1]);
 }
 
 const char* MyString::c_str() const

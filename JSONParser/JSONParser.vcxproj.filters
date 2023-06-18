@@ -80,8 +80,5 @@
     <ClInclude Include="Serializer\JsonSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ValueTypes\ValueParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

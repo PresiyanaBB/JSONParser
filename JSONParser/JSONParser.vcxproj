@@ -39,7 +39,6 @@
     <ClInclude Include="DataTypes\JsonSimpleData.h" />
     <ClInclude Include="Parser\JsonParser.h" />
     <ClInclude Include="Serializer\JsonSerializer.h" />
-    <ClInclude Include="ValueTypes\ValueParser.h" />
     <ClInclude Include="ValueTypes\JsonValue.h" />
     <ClInclude Include="ValueTypes\JsonValueFactory.h" />
     <ClInclude Include="ValueTypes\KeyValuePair.h" />

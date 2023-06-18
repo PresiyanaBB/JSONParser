@@ -92,8 +92,8 @@ DynamicArray<KeyValuePair>& JsonParser::findPair(const MyString& path)
 	if (pathWithoutElement != "")
 	{
 		JsonValue*& value = findByPath(pathWithoutElement);
-		JsonObject& currentValue = *dynamic_cast<JsonObject*>(value); //path without element //obj
-		return currentValue.getPairs();
+		DynamicArray<KeyValuePair>& kvp = dynamic_cast<JsonObject*>(value)->getPairs();
+		return kvp;
 	}
 	
 	else
@@ -191,13 +191,13 @@ void JsonParser::create(const MyString& path, const MyString& string)
 	JsonValue* replacement = setValue(string, i);
 
 	MyString result = (" [ " + curVal + " , " + replacement->stringify() + " ] ");
-	delete currentValue;
 
+	delete currentValue;
 	i = 0;
 	currentValue = setValue(result,i);
+	
+	delete replacement;
 	replacement = nullptr;
-
-	save();
 }
 
 void JsonParser::remove(const MyString& path)
@@ -218,16 +218,23 @@ void JsonParser::remove(const MyString& path)
 	pair.key = "\"" + elementKey + "\"";
 	pair.value = elementValue;
 	DynamicArray<KeyValuePair>& pairs = findPair(path);
+	DynamicArray<KeyValuePair> newPairs;
 
 	size_t i;
 	for (i = 0; i < pairs.count(); i++)
+	{
 		if (pair == pairs[i])
-		{
-			pairs.remove(pairs[i]);
-			break;
-		}
+			continue;
+		
+		newPairs.add(pairs[i]);
+	}
+		
+	pairs = newPairs;
 
-	save("","delete.txt");
+	delete pairs[pairs.count()].value;
+	pairs[pairs.count()].value = nullptr;
+	elementValue = nullptr;
+	pair.value = nullptr;
 }
 
 void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
@@ -247,6 +254,5 @@ void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
 	MyString path = pathTo + "/" + elementKey + "\"";
 	create(path, moveValue);
 	remove(pathFrom);
-
-	save("","move.txt");
+	value = nullptr;
 }
