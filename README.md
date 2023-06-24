@@ -30,9 +30,9 @@ exit             | exit console                        |exit
   * set "management/directorId" true
   * create "name/created" "{"name":"value1","address":"value2"}"
   * create "management/presidentId/president2" ""president2""
-  * search "add*"
-  * search "ress*"
-  * search "*dres*"
+  * search "add\*"
+  * search "ress\*"
+  * search "\*dres\*"
   * search "address"
   * delete "management"
   * delete "management/directorId"
