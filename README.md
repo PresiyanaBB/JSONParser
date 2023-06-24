@@ -31,7 +31,7 @@ exit             | exit console                        |exit
   * create "name/created" "{"name":"value1","address":"value2"}"
   * create "management/presidentId/president2" ""president2""
   * search "add\*"
-  * search "ress\*"
+  * search "\*ress"
   * search "\*dres\*"
   * search "address"
   * delete "management"
