@@ -17,6 +17,7 @@ class JsonArray : public JsonValue
 public:
 	JsonArray(const MyString& value, size_t& i);
 	JsonArray();
+	JsonValue*& find(DynamicArray<MyString> paths, size_t& ind) override;
 	MyString stringify() const override;
 	JsonValue* clone()  const override;
 	void parse(const MyString& value, size_t& i) override;

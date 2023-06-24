@@ -21,6 +21,8 @@ const char* const INVALID_JSON_FILE = "Json file is invalid!";
 const char* const FILE_NOT_FOUND = "Json file is not found or can't be used!";
 const char* const INVALID_PATH = "The given path is invalid";
 const char* const ELEMENT_DUPLICATION = "There is such element on the given position";
+const char* const PATH_NOT_IN_QUOTATION_MARKS = "Path must be in \"...\"";
+const char* const NO_PAIR_FOUND = "No pair was found";
 
 namespace
 {

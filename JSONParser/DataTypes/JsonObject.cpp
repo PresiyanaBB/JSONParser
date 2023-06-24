@@ -119,9 +119,6 @@ JsonValue*& JsonObject::find(DynamicArray<MyString> paths, size_t& ind)
 
 	for (size_t i = 0; i < count; i++)
 	{
-		MyString a = pairs[i].key;
-		MyString b = paths[ind];
-
 		if (pairs[i].key == paths[ind])
 		{
 			ind++;
@@ -129,7 +126,13 @@ JsonValue*& JsonObject::find(DynamicArray<MyString> paths, size_t& ind)
 				return pairs[i].value;
 
 			else
-				return pairs[i].value->find(paths,ind);
+			{
+				JsonValue*& jv = pairs[i].value->find(paths, ind);
+				if (jv == nullptr)
+					throw std::invalid_argument(INVALID_PATH);
+
+				return jv;
+			}
 		}
 	}
 

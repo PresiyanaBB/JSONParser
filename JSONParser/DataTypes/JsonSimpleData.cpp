@@ -5,6 +5,12 @@ JsonSimpleData::JsonSimpleData(const MyString& value, size_t& i) : JsonValue(Val
 	parse(value, i);
 }
 
+JsonValue*& JsonSimpleData::find(DynamicArray<MyString> paths, size_t& ind)
+{
+	JsonValue* jv = nullptr;
+	return jv;
+}
+
 void JsonSimpleData::parse(const MyString& value, size_t& i)
 {
 	if ((value.length() >= i + 4) && value.substr(i, 4) == "null")

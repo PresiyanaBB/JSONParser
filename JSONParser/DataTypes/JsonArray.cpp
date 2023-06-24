@@ -16,6 +16,12 @@ JsonArray::JsonArray(const MyString& value,size_t& i) : JsonValue(ValueTypes::ar
 	parse(value,i);
 }
 
+JsonValue*& JsonArray::find(DynamicArray<MyString> paths, size_t& ind)
+{
+	JsonValue* jv = nullptr;
+	return jv;
+}
+
 void JsonArray::parse(const MyString& value, size_t& i)
 {
 	while(true)

@@ -32,13 +32,13 @@ JsonParser::JsonParser(const MyString& fileName)
 
 	try
 	{
-		root.parse(json.substr(i, length - i),i);
+		root.parse(json.substr(i, length - i), i);
 	}
 	catch (const std::exception& ex)
 	{
 		std::cout << ex.what();
 	}
-	
+
 	ifs.close();
 }
 
@@ -49,6 +49,10 @@ void JsonParser::print() const
 
 JsonValue*& JsonParser::findByPath(const MyString& path)
 {
+
+	if (path[0] != '\"' || path[path.length() - 1] != '\"')
+		throw std::invalid_argument(PATH_NOT_IN_QUOTATION_MARKS);
+
 	DynamicArray<MyString> paths;
 	size_t ind = 0;
 	MyString currentKey;
@@ -98,7 +102,7 @@ DynamicArray<KeyValuePair>& JsonParser::findPair(const MyString& path)
 		DynamicArray<KeyValuePair>& kvp = dynamic_cast<JsonObject*>(value)->getPairs();
 		return kvp;
 	}
-	
+
 	else
 		return root.getPairs();
 }
@@ -106,14 +110,14 @@ DynamicArray<KeyValuePair>& JsonParser::findPair(const MyString& path)
 void JsonParser::search(const MyString& key) const
 {
 	std::cout << "\n[\n";
-	
+
 	if (startsWith(key, "\"*") && endsWith(key, "*\""))
 		root.search(key.substr(2, key.length() - 4), contains);
 
-	else if (endsWith(key,"*\""))
-		root.search(key.substr(0,key.length() - 2), startsWith);
-	
-	else if (startsWith(key,"\"*"))
+	else if (endsWith(key, "*\""))
+		root.search(key.substr(0, key.length() - 2), startsWith);
+
+	else if (startsWith(key, "\"*"))
 		root.search(key.substr(2, key.length() - 2), endsWith);
 
 	else
@@ -131,6 +135,7 @@ void JsonParser::set(const MyString& path, const MyString& string)
 		throw std::invalid_argument(INVALID_PATH);
 
 	JsonValue* replacement = setValue(string, i);
+
 	delete currentValue;
 	currentValue = replacement;
 	replacement = nullptr;
@@ -144,18 +149,42 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 		this->fileName = "InputFiles/" + fileName;
 
 	MyString file = this->fileName;
-	fstream ofs(file.c_str(),std::ios::trunc | std::ios::out);
-
-	if (!ofs.is_open())
-		throw std::invalid_argument(FILE_NOT_FOUND);
+	fstream ofs(file.c_str(), std::ios::trunc | std::ios::out);
 
 	if (path == "")
 		ofs << root.stringify();
-	
+
 	else
 	{
-		DynamicArray<KeyValuePair>& current = this->findPair(path);
-		ofs << "{\n" << current[current.count() - 1].key << ":" << current[current.count() - 1].value->stringify() << "\n}";
+		try
+		{
+			MyString elementKey;
+
+			for (int i = path.length() - 1; i >= 0; i--)
+			{
+				if (path[i] == '/')
+					break;
+
+				elementKey += path[i];
+			}
+
+			JsonValue*& elementValue = findByPath(path);
+			KeyValuePair pair;
+			elementKey.reverse();
+			pair.key = "\"" + elementKey;
+			pair.value = elementValue;
+			DynamicArray<KeyValuePair>& pairs = findPair(path);
+
+			if (pair.key[1] == '\"')
+				pair.key = pair.key.substr(1, pair.key.length() - 1);
+
+
+			ofs << "{\n" + pair.key + " : " + pair.value->stringify() + "\n}";
+		}
+		catch (const std::exception&)
+		{
+			ofs << root.stringify();
+		}
 	}
 
 	ofs.close();
@@ -163,15 +192,17 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 
 void JsonParser::create(const MyString& path, const MyString& string)
 {
-	try
+	/*try
 	{
 		JsonValue*& isValueUnique = findByPath(path);
+		if (isValueUnique != nullptr)
+			throw std::invalid_argument(ELEMENT_DUPLICATION);
 	}
 	catch (const std::exception&)
 	{
-		throw std::invalid_argument(ELEMENT_DUPLICATION);
-	}
-		
+
+	}*/
+
 	size_t len = path.length() - 1;
 	MyString pathWithoutElement;
 	size_t indToElement = 0;
@@ -195,20 +226,20 @@ void JsonParser::create(const MyString& path, const MyString& string)
 
 	MyString curVal = currentValue->stringify();
 	size_t i = 0;
-	JsonValue* replacement = setValue(string.substr(1,string.length() - 2), i);
+	JsonValue* replacement = setValue(string.substr(1, string.length() - 2), i);
 
 	MyString result = (" [ " + curVal + " , " + replacement->stringify() + " ] ");
 
 	delete currentValue;
 	i = 0;
-	currentValue = setValue(result,i);
-	
+	currentValue = setValue(result, i);
+
 	delete replacement;
 	replacement = nullptr;
 }
 
 void JsonParser::remove(const MyString& path)
-{	
+{
 	MyString elementKey;
 
 	for (int i = path.length() - 1; i >= 0; i--)
@@ -225,9 +256,9 @@ void JsonParser::remove(const MyString& path)
 	pair.key = "\"" + elementKey;
 	pair.value = elementValue;
 	DynamicArray<KeyValuePair>& pairs = findPair(path);
-	
+
 	if (pair.key[1] == '\"')
-		pair.key = pair.key.substr(1,pair.key.length() - 1);
+		pair.key = pair.key.substr(1, pair.key.length() - 1);
 
 	DynamicArray<KeyValuePair> newPairs;
 
@@ -236,10 +267,10 @@ void JsonParser::remove(const MyString& path)
 	{
 		if (pair == pairs[i])
 			continue;
-		
+
 		newPairs.add(pairs[i]);
 	}
-		
+
 	pairs = newPairs;
 
 	delete pairs[pairs.count()].value;
@@ -262,7 +293,7 @@ void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
 
 	JsonValue*& value = findByPath(pathFrom);
 	MyString moveValue = value->stringify();
-	MyString path = pathTo.substr(0,pathTo.length() - 1) + "/" + elementKey;
+	MyString path = pathTo.substr(0, pathTo.length() - 1) + "/" + elementKey;
 	create(path, moveValue);
 	remove(pathFrom);
 	value = nullptr;
