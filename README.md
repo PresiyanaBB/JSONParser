@@ -10,7 +10,7 @@
 
 * Commands
 
-Command list:    | Description                         |Syntax:                       
+Command list     | Description                         |Syntax                        
 ---------------- | ----------------------------------- |------------------------------
 open             | opens file                          |open \<filename\>               
 print            | print file on console               |print                         
