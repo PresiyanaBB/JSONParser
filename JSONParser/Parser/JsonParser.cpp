@@ -180,6 +180,8 @@ void JsonParser::save(const MyString& path, const MyString& fileName)
 
 
 			ofs << "{\n" + pair.key + " : " + pair.value->stringify() + "\n}";
+
+			pair.value = nullptr;
 		}
 		catch (const std::exception&)
 		{
@@ -219,7 +221,9 @@ void JsonParser::create(const MyString& path, const MyString& string)
 	for (size_t i = 0; i < len; i++)
 		pathWithoutElement += path[i];
 
-	pathWithoutElement += "\"";
+	if (pathWithoutElement[pathWithoutElement.length() - 1] != '\"')	
+		pathWithoutElement += "\"";
+
 	JsonValue*& currentValue = findByPath(pathWithoutElement); //path without element
 	if (currentValue == nullptr)
 		throw std::invalid_argument(INVALID_PATH);
@@ -282,6 +286,7 @@ void JsonParser::remove(const MyString& path)
 void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
 {
 	MyString elementKey;
+
 	for (int i = pathFrom.length() - 1; i >= 0; i--)
 	{
 		if (pathFrom[i] == '/')
@@ -289,14 +294,23 @@ void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
 
 		elementKey += pathFrom[i];
 	}
-	elementKey.reverse();
 
-	JsonValue*& value = findByPath(pathFrom);
-	MyString moveValue = value->stringify();
-	MyString path = pathTo.substr(0, pathTo.length() - 1) + "/" + elementKey;
+	JsonValue*& elementValue = findByPath(pathFrom);
+	KeyValuePair pair;
+	elementKey.reverse();
+	pair.key = "\"" + elementKey;
+	pair.value = elementValue;
+	DynamicArray<KeyValuePair>& pairs = findPair(pathFrom);
+
+	if (pair.key[1] == '\"')
+		pair.key = pair.key.substr(1, pair.key.length() - 1);
+
+	MyString moveValue = "\"" + pair.value->stringify() + "\"";
+	MyString path = pathTo.substr(0,pathTo.length() - 1) + "/new\"";
+
+	pair.value = nullptr;
 	create(path, moveValue);
 	remove(pathFrom);
-	value = nullptr;
 }
 
 void JsonParser::open(const MyString& filename)
