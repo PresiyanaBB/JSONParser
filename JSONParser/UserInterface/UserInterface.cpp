@@ -129,6 +129,7 @@ bool runUserInterface(JsonParser& json)
 
 void run()
 {
+	MyString filename;
 	cout << "Note: first open file\n";
 	while (true)
 	{
@@ -144,7 +145,6 @@ void run()
 
 			if (option == "open")
 			{
-				MyString filename;
 				cin >> filename;
 				JsonParser json(filename);
 
