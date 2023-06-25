@@ -4,7 +4,7 @@ void KeyValuePair::free()
 {
 	if (value)
 	{
-		delete value; 
+		delete value;
 		value = nullptr;
 	}
 }
@@ -21,10 +21,7 @@ KeyValuePair& KeyValuePair::operator=(JsonValue* other)
 
 void KeyValuePair::copyFrom(const KeyValuePair& other)
 {
-	if (value != nullptr)
-	{
-		value = other.value->clone();
-	}
+	value = other.value->clone();
 	key = other.key;
 }
 

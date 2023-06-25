@@ -65,12 +65,12 @@ void JsonSimpleData::parse(const MyString& value, size_t& i)
 }
 
 
-	MyString JsonSimpleData::stringify() const
-	{
-		return this->value;
-	}
+MyString JsonSimpleData::stringify() const
+{
+	return this->value;
+}
 
-	JsonValue* JsonSimpleData::clone() const
-	{
-		return new JsonSimpleData(*this);
-	}
+JsonValue* JsonSimpleData::clone() const
+{
+	return new JsonSimpleData(*this);
+}

@@ -7,13 +7,13 @@ JsonArray::JsonArray() : JsonValue(ValueTypes::array)
 	values = new JsonValue * [capacity];
 }
 
-JsonArray::JsonArray(const MyString& value,size_t& i) : JsonValue(ValueTypes::array)
+JsonArray::JsonArray(const MyString& value, size_t& i) : JsonValue(ValueTypes::array)
 {
 	size = 0;
 	capacity = 8;
 	values = new JsonValue * [capacity];
 
-	parse(value,i);
+	parse(value, i);
 }
 
 JsonValue*& JsonArray::find(DynamicArray<MyString> paths, size_t& ind)
@@ -24,7 +24,7 @@ JsonValue*& JsonArray::find(DynamicArray<MyString> paths, size_t& ind)
 
 void JsonArray::parse(const MyString& value, size_t& i)
 {
-	while(true)
+	while (true)
 	{
 		if (value[i] == ' ' || value[i] == '\n' || value[i] == ',')
 			i++;
@@ -133,7 +133,7 @@ JsonArray& JsonArray::operator=(JsonArray&& other)
 
 JsonArray& JsonArray::operator+=(const JsonArray& other)
 {
-	JsonValue** result = new JsonValue*[(size + other.size)];
+	JsonValue** result = new JsonValue * [(size + other.size)];
 	for (size_t i = 0; i < size; i++)
 		result[i] = this->values[i];
 
@@ -157,7 +157,7 @@ void JsonArray::add(JsonArray value)
 {
 	if (size == capacity)
 		resize();
-	
+
 	for (size_t i = 0; i < value.size; i++)
 	{
 		if (size == capacity)
@@ -171,7 +171,7 @@ void JsonArray::add(JsonValue* value)
 {
 	if (size == capacity)
 		resize();
-	
+
 	values[size++] = value->clone();
 }
 
@@ -186,7 +186,7 @@ void JsonArray::search(const MyString& key, bool (*criteria)(const MyString& lhs
 {
 	for (size_t i = 0; i < size; i++)
 		if (values[i]->getType() == ValueTypes::object)
-			values[i]->search(key,criteria);
+			values[i]->search(key, criteria);
 }
 
 const size_t JsonArray::getSize() const

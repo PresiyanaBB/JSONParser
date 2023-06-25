@@ -3,21 +3,21 @@
 bool isOptionValid(MyString option)
 {
 	return (option == "open" ||
-			option == "print" ||
-			option == "search" ||
-			option == "set" ||
-			option == "create" ||
-			option == "delete" ||
-			option == "move" ||
-			option == "save" ||
-			option == "saveas" ||
-			option == "exit");
+		option == "print" ||
+		option == "search" ||
+		option == "set" ||
+		option == "create" ||
+		option == "delete" ||
+		option == "move" ||
+		option == "save" ||
+		option == "saveas" ||
+		option == "exit");
 }
 
 void printInstructions()
 {
 	cout
-	 << "-----------------------------------------------------------------------------------\n" <<
+		<< "-----------------------------------------------------------------------------------\n" <<
 		"Command list:   |Description                        |Syntax:                       \n" <<
 		"-----------------------------------------------------------------------------------\n" <<
 		"open            |opens file                         |open <filename>               \n" <<
@@ -129,7 +129,6 @@ bool runUserInterface(JsonParser& json)
 
 void run()
 {
-	MyString filename;
 	cout << "Note: first open file\n";
 	while (true)
 	{
@@ -145,6 +144,7 @@ void run()
 
 			if (option == "open")
 			{
+				MyString filename;
 				cin >> filename;
 				JsonParser json(filename);
 

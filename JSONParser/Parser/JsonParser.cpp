@@ -221,7 +221,7 @@ void JsonParser::create(const MyString& path, const MyString& string)
 	for (size_t i = 0; i < len; i++)
 		pathWithoutElement += path[i];
 
-	if (pathWithoutElement[pathWithoutElement.length() - 1] != '\"')	
+	if (pathWithoutElement[pathWithoutElement.length() - 1] != '\"')
 		pathWithoutElement += "\"";
 
 	JsonValue*& currentValue = findByPath(pathWithoutElement); //path without element
@@ -306,7 +306,7 @@ void JsonParser::move(const MyString& pathFrom, const MyString& pathTo)
 		pair.key = pair.key.substr(1, pair.key.length() - 1);
 
 	MyString moveValue = "\"" + pair.value->stringify() + "\"";
-	MyString path = pathTo.substr(0,pathTo.length() - 1) + "/new\"";
+	MyString path = pathTo.substr(0, pathTo.length() - 1) + "/new\"";
 
 	pair.value = nullptr;
 	create(path, moveValue);

@@ -1,18 +1,18 @@
 #include "JsonObject.h"
 
-JsonObject::JsonObject(const MyString& value,size_t& i) : JsonValue(ValueTypes::object)
+JsonObject::JsonObject(const MyString& value, size_t& i) : JsonValue(ValueTypes::object)
 {
-	parse(value,i);
+	parse(value, i);
 }
 
 JsonObject::JsonObject() : JsonValue(ValueTypes::object) {}
 
-void JsonObject::parse(const MyString& value,size_t& i)
+void JsonObject::parse(const MyString& value, size_t& i)
 {
 	bool hasKey = false;
 	KeyValuePair currentPair;
 
-	while(true)
+	while (true)
 	{
 		if (value[i] == ' ' || value[i] == '\n' || value[i] == ',')
 		{
@@ -28,9 +28,9 @@ void JsonObject::parse(const MyString& value,size_t& i)
 
 		else if (!hasKey)
 		{
-			currentPair.key = setKey(value,i);
+			currentPair.key = setKey(value, i);
 			hasKey = true;
-			
+
 			while (value[i++] != ':');
 		}
 
@@ -67,15 +67,15 @@ void JsonObject::search(const MyString& key, bool (*criteria)(const MyString& lh
 
 	for (size_t i = 0; i < count; i++)
 	{
-		if (criteria(pairs[i].key,key))
+		if (criteria(pairs[i].key, key))
 			std::cout << pairs[i].value->stringify() << std::endl;
 
 		else
-			pairs[i].value->search(key,criteria);
+			pairs[i].value->search(key, criteria);
 	}
 }
 
-MyString JsonObject::setKey(const MyString& value,size_t& i)
+MyString JsonObject::setKey(const MyString& value, size_t& i)
 {
 	MyString key;
 
@@ -92,7 +92,7 @@ MyString JsonObject::setKey(const MyString& value,size_t& i)
 
 MyString JsonObject::stringify() const
 {
-	MyString result = "{\n";	
+	MyString result = "{\n";
 	size_t size = pairs.count();
 
 	for (size_t i = 0; i < size - 1; i++)
@@ -103,10 +103,7 @@ MyString JsonObject::stringify() const
 	}
 
 	((result += "  ") += pairs[size - 1].key) += " : ";
-	if (pairs[size - 1].value != nullptr)
-	{
-		result += pairs[size - 1].value->stringify() += "\n}";
-	}
+	result += pairs[size - 1].value->stringify() += "\n}";
 
 	return result;
 }
