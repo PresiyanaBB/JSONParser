@@ -1,0 +1,45 @@
+aaaa
+open sssss
+
+open json.txt
+aaaaaa
+print
+
+search "add*"
+search "*ress"
+search "*am*" //name
+search "address"
+search "jjjjj"
+
+set "management/directorId" "44"
+print
+set "management/directorId" 0.76
+print
+set "management/directorId/aaaaa" true
+open json.txt
+set "management" true
+print
+
+create "name/created" "{"name":"value1","address":"value2"}"
+print
+create "management/presidentId/president2" ""president2""
+print
+
+move "management" "name"
+print
+
+open json.txt //reopen to print
+print
+delete "management/directorId"
+print
+delete "management"
+print
+delete "management/directorId"
+open json.txt
+
+saveas "offices" test.txt
+open test.txt
+print
+save "offices"
+open json.txt
+print

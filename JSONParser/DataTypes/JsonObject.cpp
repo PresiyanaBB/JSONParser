@@ -103,7 +103,10 @@ MyString JsonObject::stringify() const
 	}
 
 	((result += "  ") += pairs[size - 1].key) += " : ";
-	result += pairs[size - 1].value->stringify() += "\n}";
+	if (pairs[size - 1].value != nullptr)
+	{
+		result += pairs[size - 1].value->stringify() += "\n}";
+	}
 
 	return result;
 }
